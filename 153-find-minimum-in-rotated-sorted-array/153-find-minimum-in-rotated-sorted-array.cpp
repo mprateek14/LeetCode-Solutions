@@ -4,9 +4,9 @@ public:
         
         int left = 0;
         int right = nums.size()-1;
-        if(nums[left] < nums[right]) return nums[left];
+        
         while(left<right){
-            
+            if(nums[left] < nums[right]) return nums[left];
             
             int mid = left + (right-left)/2;
             
