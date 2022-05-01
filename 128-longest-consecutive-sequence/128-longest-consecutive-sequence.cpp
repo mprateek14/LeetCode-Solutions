@@ -6,7 +6,7 @@ public:
         int maxi = 0;
         
         for(int i: nums){
-            if(hash.find(i-1) != hash.end()) continue;
+            if(hash.count(i-1)) continue;
             else{
                 int j = i+1;
                 int sum = 1;
