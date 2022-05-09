@@ -25,9 +25,9 @@ public:
         }
         
         if(gasSum<costSum) return -1;
-        
-        if(total>=gasSum - costSum) return start;
-        else return -1;
+        else return start;
+        // if(total>=gasSum - costSum) return start;
+        // else return -1;
         
         
     }
