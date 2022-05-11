@@ -25,35 +25,29 @@ public:
         
         if(!head) return NULL;
         
-        vector<int> maps;
-        
-        ListNode *node = head;
-        
-        while(node){
-            maps.push_back(node->val);
-            node = node->next;
-        }
-        
-        int n = maps.size();
-        
-        TreeNode *newHead = helper(maps, 0, n-1);
-        
-        return newHead;
+        return helper(head, NULL);
         
     }
     
-    TreeNode *helper(vector<int> &arr, int low, int high){
-        if(low>high) return NULL;
+    TreeNode *helper(ListNode *head, ListNode *tail){
+        if(head == tail) return NULL;
+        ListNode *sp = head;
+        ListNode *fp = head;
         
-        int mid = low + (high-low)/2;
+        while(fp!=tail and fp->next!=tail){
+            sp = sp->next;
+            fp = fp->next->next;
+        }
         
-        TreeNode *head = new TreeNode(arr[mid]);
+        TreeNode *node = new TreeNode(sp->val);
         
-        head->left = helper(arr, low, mid-1);
-        head->right = helper(arr, mid+1, high);
+        node->left = helper(head, sp);
+        node->right = helper(sp->next, tail);
         
-        return head;
+        return node;
         
     }
+    
+
     
 };
