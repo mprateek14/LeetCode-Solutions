@@ -18,7 +18,6 @@ public:
             sp = sp->next;
             fp = fp->next->next;
         }
-        
         return sp;
     }
 };
