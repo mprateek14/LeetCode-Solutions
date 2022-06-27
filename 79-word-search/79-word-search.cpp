@@ -15,7 +15,7 @@ public:
         
     }
     
-    bool helper(vector<vector<char>>& board, int i, int j, string word, int idx){
+    bool helper(vector<vector<char>>& board, int i, int j, string &word, int idx){
         if(idx == word.length()) return true;
         
         if(i<0 or i>=board.size() or j<0 or j>=board[0].size() or board[i][j]!=word[idx]) return false;
