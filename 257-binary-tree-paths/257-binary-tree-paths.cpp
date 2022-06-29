@@ -22,7 +22,6 @@ public:
     void findPaths(TreeNode *root, vector<string> &ans, string s){
         
         if(!root->right and !root->left){
-            cout << s << " ";
             ans.push_back(s);
             return;
         }
