@@ -18,29 +18,26 @@ public:
             inMap[inorder[i]] = i;
         }
         
-        TreeNode *root = build(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1, inMap);
-        
-        return root;
-        
+        TreeNode *root = buildNow(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1, inMap);
+    
+        return root;        
     }
     
-    TreeNode * build(vector<int> &preorder, int preStart, int preEnd, vector<int> &inorder, int inStart, int inEnd, map<int, int> &inMap){
-    
+    TreeNode* buildNow(vector<int> &preorder, int preStart, int preEnd, vector<int> &inorder, int inStart,                        int inEnd, map<int, int> &inMap){
         
         if(preStart>preEnd or inStart>inEnd) return NULL;
         
         TreeNode *root = new TreeNode(preorder[preStart]);
         
-        int inRoot = inMap[root->val];
+        int inRootIdx = inMap[root->val];
+        int leftSize = inRootIdx - inStart;
         
-        int left = inRoot - inStart;
+        root->left = buildNow(preorder, preStart+1, preStart+leftSize, inorder, inStart, inRootIdx-1, inMap);
         
-        root->left = build(preorder,preStart+1, preStart+left, inorder, inStart, inRoot-1, inMap);
-        
-        root->right = build(preorder, preStart+left+1, preEnd, inorder, inRoot+1, inEnd, inMap);
+        root->right = buildNow(preorder, preStart+leftSize+1, preEnd, inorder, inRootIdx+1, inEnd, inMap);
         
         return root;
         
-        
     }
+    
 };
