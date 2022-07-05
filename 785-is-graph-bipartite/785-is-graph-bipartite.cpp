@@ -8,7 +8,7 @@ public:
         
         for(int i=0; i<n; i++){
             if(color[i] == -1){
-                if(checkBipartite(graph, i, color) == false) return false;
+                if(checkBipartiteDFS(graph, i, color) == false) return false;
             }
         }
         
@@ -16,7 +16,7 @@ public:
     }
     
     
-    bool checkBipartite(vector<vector<int>> graph, int node, vector<int> &color){
+    bool checkBipartite(vector<vector<int>> &graph, int node, vector<int> &color){
         
         queue<int> q;
         q.push(node);
@@ -37,5 +37,18 @@ public:
         return true;
     }
     
+    bool checkBipartiteDFS(vector<vector<int>>& graph, int node, vector<int> &color){
+        if(color[node] == -1) color[node] = 1;
+        
+        for(auto it: graph[node]){
+            if(color[it] == -1){
+                color[it] = !color[node];
+                if(!checkBipartiteDFS(graph, it, color)) return false;
+            }
+            else if(color[it] == color[node]) return false;
+        }
+        
+        return true;
+    }
     
 };
