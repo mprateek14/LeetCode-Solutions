@@ -8,7 +8,7 @@ public:
         
         for(int i=0; i<n; i++){
             if(color[i] == -1){
-                if(checkBipartiteDFS(graph, i, color) == false) return false;
+                if(checkBipartite(graph, i, color) == false) return false;
             }
         }
         
