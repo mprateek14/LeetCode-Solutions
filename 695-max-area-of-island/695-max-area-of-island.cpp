@@ -14,8 +14,9 @@ public:
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 if(grid[i][j] == 1 and !vis[i][j]){
-                    bfs(grid, i, j, n, m, vis, dir, ans);
                     vis[i][j] = 1;
+                    bfs(grid, i, j, n, m, vis, dir, ans);
+                    
                 }
             }
         }
@@ -30,7 +31,6 @@ public:
         int sum = 1;
         
         q.push({i, j});
-        vis[i][j] = 1;
         
         while(!q.empty()){
             int row = q.front().first;
@@ -42,7 +42,6 @@ public:
                 int c = col + dir[k+1];
                 
                 if(r>=0 and r<n and c>=0 and c<m and grid[r][c] == 1 and !vis[r][c]){
-                    cout << r << " " << c << endl;
                     q.push({r,c});
                     sum++;
                     vis[r][c] = 1;
@@ -51,7 +50,6 @@ public:
             
         }
             ans = max(ans, sum);
-            cout << "ans for " <<i << " " << j << " is" << ans << endl;
     }
     
     
