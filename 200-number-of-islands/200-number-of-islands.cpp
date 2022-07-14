@@ -6,13 +6,12 @@ public:
         int m = grid[0].size();
         
         int ans = 0;
-        vector<vector<int>> visited(n,vector<int>(m,0));
+        vector<int> dir = {-1, 0, 1, 0, -1};
         
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                if(grid[i][j] == '1' and !visited[i][j]){
-                    bfs(grid, i, j, n, m, visited);
-                    visited[i][j] = 1;
+                if(grid[i][j] == '1'){
+                    dfs(grid, i, j, n, m, dir);
                     ans++;
                 }
             }
@@ -21,31 +20,16 @@ public:
         return ans;
     }
     
-    
-    void bfs(vector<vector<char>> &grid, int row, int col, int n, int m, vector<vector<int>> &visited){
+    void dfs(vector<vector<char>> &grid, int i, int j, int n, int m, vector<int> &dir){
+        if(i<0 or i>=n or j<0 or j>=m or grid[i][j] == '0') return;
         
-        vector<int> dir = {-1,0,1,0,-1};
+        grid[i][j] = '0';
         
-        queue<pair<int, int>> q;
-        q.push({row,col});
         
-        while(!q.empty()){
-            int topR = q.front().first;
-            int topC = q.front().second;
-            q.pop();
-            
-            for(int i=0; i<4; i++){
-                int r = topR + dir[i];
-                int c = topC + dir[i+1];
-                
-                if(r>=0 and r<n and c>=0 and c<m and grid[r][c] == '1' and !visited[r][c]){
-                    q.push({r, c});
-                    visited[r][c] = 1;
-                }
-            }
-            
+        for(int k=0; k<4; k++){
+            dfs(grid, i+dir[k], j+dir[k+1], n, m, dir);
         }
-        
     }
+        
     
 };
