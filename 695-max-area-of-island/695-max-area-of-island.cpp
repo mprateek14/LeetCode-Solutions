@@ -5,18 +5,12 @@ public:
         int n = grid.size();
         int m = grid[0].size();
         
-        vector<int> dir = {-1,0,1,0,-1};
-            
-        vector<vector<int>> vis(n, vector<int>(m,0));
-        
         int ans = 0;
         
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                if(grid[i][j] == 1 and !vis[i][j]){
-                    vis[i][j] = 1;
-                    bfs(grid, i, j, n, m, vis, dir, ans);
-                    
+                if(grid[i][j] == 1){
+                    ans = max(ans, dfs(grid, i, j, n, m));
                 }
             }
         }
@@ -25,32 +19,14 @@ public:
         
     }
     
-    void bfs(vector<vector<int>> &grid, int i, int j, int n, int m, vector<vector<int>> &vis, vector<int> &dir, int &ans){
+    int dfs(vector<vector<int>> &grid, int i, int j, int n, int m){
         
-        queue<pair<int, int>> q;
-        int sum = 1;
+        if(i<0 or i>=n or j<0 or j>=m or grid[i][j] == 0) return 0;
         
-        q.push({i, j});
+        grid[i][j] = 0;
         
-        while(!q.empty()){
-            int row = q.front().first;
-            int col = q.front().second;
-            q.pop();
-            
-            for(int k=0; k<4; k++){
-                int r = row + dir[k];
-                int c = col + dir[k+1];
-                
-                if(r>=0 and r<n and c>=0 and c<m and grid[r][c] == 1 and !vis[r][c]){
-                    q.push({r,c});
-                    sum++;
-                    vis[r][c] = 1;
-                }
-            }
-            
-        }
-            ans = max(ans, sum);
+        return 1 + dfs(grid, i+1, j, n,m) + dfs(grid,i,j+1, n,m) + dfs(grid, i-1,j, n,m) + dfs(grid, i,j-1,n,m);
     }
-    
+        
     
 };
