@@ -12,9 +12,9 @@ public:
     }
     
     void subsets(vector<int> &arr, int idx, vector<int> &temp, vector<vector<int>> &ans){
-        if(idx>arr.size()) return;
-        ans.push_back(temp);
         
+        ans.push_back(temp);
+        if(idx>=arr.size()) return;
         for(int i=idx; i<arr.size(); i++){
             if(i!=idx and arr[i] == arr[i-1]) continue;
             temp.push_back(arr[i]);
