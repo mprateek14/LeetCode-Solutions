@@ -11,13 +11,16 @@ public:
     
     void subset(vector<int> &arr, int idx, vector<int> temp, vector<vector<int>> &ans){
         
-        ans.push_back(temp);
-        
-        for(int i=idx; i<arr.size(); i++){
-            temp.push_back(arr[i]);
-            subset(arr, i+1, temp, ans);
-            temp.pop_back();
+        if(idx>=arr.size()){
+            ans.push_back(temp);
+            return;
         }
+        
+        temp.push_back(arr[idx]);
+        subset(arr, idx+1, temp, ans);
+        
+        temp.pop_back();
+        subset(arr, idx+1, temp, ans);
            
     }
     
