@@ -15,8 +15,9 @@ public:
         }
         
         for(int i=0; i<m; i++){
-            goal[s2[i]-'a']++;
             if(i>=n) goal[s2[i-n] - 'a']--;
+            goal[s2[i]-'a']++;
+            
             if(cur == goal) return true;
         }
         
