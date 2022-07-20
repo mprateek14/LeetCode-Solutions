@@ -7,17 +7,20 @@ public:
         
         if(n>m) return false;
         
-        vector<int> cur(26,0);
-        vector<int> goal(26,0);
+        unordered_map<char, int> cur;
+        unordered_map<char, int> goal;
         
         for(char c: s1){
-            cur[c-'a']++;
+            cur[c]++;
         }
         
         for(int i=0; i<m; i++){
-            if(i>=n) goal[s2[i-n] - 'a']--;
-            goal[s2[i]-'a']++;
-            
+            goal[s2[i]]++;
+            if(i>=n){
+                goal[s2[i-n]]--;
+                cout << goal[s2[i-n]];
+                if(goal[s2[i-n]] == 0) goal.erase(s2[i-n]);
+            }
             if(cur == goal) return true;
         }
         
