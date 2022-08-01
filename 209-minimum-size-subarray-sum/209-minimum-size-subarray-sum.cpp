@@ -8,21 +8,20 @@ public:
         int l = 0;
         int r = 0;
         int sum = 0;
-        
-        for(r = 0; r<n; r++){
-            sum+= nums[r];
-                while(sum>=target){
-                    // cout << sum << " " << l << " ";
-                    int len = r-l+1;
-                    ans = min(ans, len);
-                    sum-=nums[l];
-                    l++;
-                }
-
+        for(r=0; r<n; r++){
+            sum += nums[r];
+            while(sum>=target){
+                int len = r-l+1;
+                ans = min(ans, len);
+                sum-=nums[l];
+                l++;
+            }
             
         }
         
-        if(ans!=INT_MAX) return ans;
-        return 0;
+        if(ans == INT_MAX) return 0;
+        
+        return ans;
+        
     }
 };
