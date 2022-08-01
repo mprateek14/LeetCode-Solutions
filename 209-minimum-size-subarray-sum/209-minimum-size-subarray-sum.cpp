@@ -10,7 +10,7 @@ public:
         int sum = 0;
         for(r=0; r<n; r++){
             sum += nums[r];
-            while(sum>=target){
+            while(sum>=target and l<=r){
                 int len = r-l+1;
                 ans = min(ans, len);
                 sum-=nums[l];
